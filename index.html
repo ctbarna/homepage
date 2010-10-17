@@ -15,7 +15,14 @@
 	</script>
 	
 	<script type="text/javascript">
+	function prepLoadURL (rawURL) {
+		rawURL = rawURL.substr(1);
+		
+		return "ajax/" + rawURL;
+	}
+	
 	$(document).ready(function() {
+		
 		$("#sidebar a").mouseover(function() {
 			$(this).stop().animate({
 				"background-color":"#000"
@@ -32,7 +39,13 @@
 				duration:250,
 				queue:false
 			});
-		})
+		});
+		
+		$("#sidebar a").click(function () {
+			$("#body").load(prepLoadURL($(this).attr("href")), function() {
+				$(this).effect("slide",{}, 1000);
+			});
+		});
 	});
 	</script>
 	
@@ -45,6 +58,7 @@
 		
 		#sidebar {
 			width:300px;
+			float:left;
 		}
 		
 		#sidebar ul {
@@ -58,6 +72,11 @@
 			display:block;
 			padding:5px;
 		}
+		
+		#body {
+			width:490px;
+			float:right;
+		}
 	</style>
 </head>
 
@@ -69,7 +88,7 @@
 	
 	<div id="sidebar">
 		<ul>
-			<li><h2><a href="#">Student</a></h2></li>
+			<li><h2><a href="#student.html">Student</a></h2></li>
 			<li><h2><a href="#">Hacker</a></h2></li>
 			<li><h2><a href="#">Other</a></h2></li>
 		</ul>
