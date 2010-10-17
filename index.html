@@ -5,12 +5,79 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>index</title>
+	<title>Chris Barna</title>
 	
+	<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAKy0m-fPXPjP1Iwv5x93W4hS_-1NcYG-MN5cyo4iWtvLXN8ob0xQcDXX4sN6g70HzNBM5a8aXJJgW8g"></script>
+
+	<script type="text/javascript">
+		google.load("jquery", "1.4.3");
+		google.load("jqueryui", "1.8.5");
+	</script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#sidebar a").mouseover(function() {
+			$(this).stop().animate({
+				"background-color":"#000"
+			}, {
+				duration:500,
+				queue:false
+			});
+		});
+		
+		$("#sidebar a").mouseout(function() {
+			$(this).stop().animate({
+				"background-color":"#fff"
+			}, {
+				duration:250,
+				queue:false
+			});
+		})
+	});
+	</script>
+	
+	<style type="text/css">
+		#container {
+			width:800px;
+			margin:0 auto;
+
+		}
+		
+		#sidebar {
+			width:300px;
+		}
+		
+		#sidebar ul {
+			list-style-type:none;
+			margin:0;
+			padding-left:0px;
+		}
+		
+		#sidebar h2 a:link, #sidebar h2 a:visited {
+			border:1px solid #000;
+			display:block;
+			padding:5px;
+		}
+	</style>
 </head>
 
 <body>
-
-
+<div id="container">
+	<div id="header">
+		<h1>Chris Barna</h1>
+	</div>
+	
+	<div id="sidebar">
+		<ul>
+			<li><h2><a href="#">Student</a></h2></li>
+			<li><h2><a href="#">Hacker</a></h2></li>
+			<li><h2><a href="#">Other</a></h2></li>
+		</ul>
+	</div>
+	
+	<div id="body">
+		
+	</div>
+</div>
 </body>
 </html>
