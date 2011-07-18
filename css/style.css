@@ -82,7 +82,7 @@ a:hover { color: #036; }
  */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nixie One';
+  font-family: 'Nixie One', Georgia, serif;
 }
 
 /* Header */
@@ -96,7 +96,7 @@ header {
 }
 
 #container {
-  font-family:'Muli'; /* , Georgia, Times, serif; */
+  font-family:'Muli', Verdana, sans-serif;
 }
 
 /*
