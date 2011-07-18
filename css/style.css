@@ -85,18 +85,34 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Nixie One', Georgia, serif;
 }
 
-/* Header */
 h1 {
   font-size:24pt;
   letter-spacing:1px;
 }
 
+h2 {
+  font-size:16pt;
+  letter-spacing:1px;
+}
+
 header {
   border-bottom:1px solid #444;
+  margin-bottom:5px;
 }
 
 #container {
   font-family:'Muli', Verdana, sans-serif;
+  font-size:10pt;
+  line-height:1.5;
+}
+
+#container p {
+  margin-bottom:5px;
+}
+
+.sec_head {
+  margin-top:10px;
+  margin-bottom:5px;
 }
 
 /*
