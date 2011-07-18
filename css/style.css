@@ -78,20 +78,30 @@ a:hover { color: #036; }
 /**
  * Primary styles
  *
- * Author: 
+ * Author: Chris Barna
  */
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nixie One';
+}
 
+/* Header */
+h1 {
+  font-size:24pt;
+  letter-spacing:1px;
+}
 
+header {
+  border-bottom:1px solid #444;
+}
 
+#container {
+  font-family:'Muli'; /* , Georgia, Times, serif; */
+}
 
-
-
-
-
-
-
-
+/*
+ * End User Style
+ */
 
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
