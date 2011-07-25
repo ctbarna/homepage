@@ -82,7 +82,7 @@ function load (e) {
     var city = document.getElementById("city-"+k);
 
     if (document.getElementById("display-style").selectedIndex == 0) {
-      city.setAttribute('r', Math.log((counts[k+'']/max)+1)*100);
+      city.setAttribute('r', Math.log((counts[k+'']/max)+1)*125);
     } else {
       city.setAttribute('r', (counts[k+'']/max)*100);
     }
