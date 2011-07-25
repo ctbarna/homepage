@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/960.css">
   <script src="js/libs/modernizr-1.7.min.js"></script>
   <style>
-    #markets circle {
+    #cities circle {
       fill:#050;
       fill-opacity:.7;
       stroke:#030;
@@ -69,6 +69,12 @@
       <div class="grid_12">
         <h2>Clustering Farmer's Markets</h2>
       </div>
+      <div class="grid_1 prefix_11">
+        <select id="display-style">
+          <option value="log">Logarithmic</option>
+          <option value="linear">Linear</option>
+        </select>
+      </div>
       <div class="clear"></div>
       <div class="grid_12">
         <div id="map"></div>
@@ -83,6 +89,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
   <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>
   <script src="js/polymaps.min.js"></script>
+  <script src="src/cities.js"></script>
   <script src="js/kmeans.js"></script>
   <script src="js/farmers-map.js"></script>
 

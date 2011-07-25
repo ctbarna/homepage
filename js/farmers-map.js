@@ -1,3 +1,10 @@
+Array.max = function( array ){
+    return Math.max.apply( Math, array );
+};
+Array.min = function( array ){
+    return Math.min.apply( Math, array );
+};
+
 po = org.polymaps;
 
 var map = po.map()
@@ -13,32 +20,72 @@ map.add(po.image()
         + "/998/256/{Z}/{X}/{Y}.png").hosts(["a.", "b.", "c.", ""])));
 
 map.add(po.geoJson()
+        .features(city_points['features'])
+        .id("cities")
+        .on("load", loadCities));
+
+
+var markets = po.geoJson()
     .url("http://ctbarna.iriscouch.com/farmers_markets/_design/geo/_rewrite/data?bbox="+getBB())
     .on("load", load)
-    .id("markets"));
+    .id("markets");
+map.add(markets);
+
 
 map.add(po.compass()
     .pan("none"));
 
+
+function loadCities(e) {
+for (var i = 0; i < e.features.length; i++) {
+    var feature = e.features[i];
+    feature.element.setAttribute("id", "city-"+i);
+  }
+}
+
 function load (e) {
-  var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
-      .iterations(16)
-      .size(64));
+  function findDistance(city_coords1, market_coords1) {
+    var temp_x = city_coords1[0] - market_coords[0],
+        temp_y = city_coords1[1] - market_coords[1];
+    return Math.sqrt(temp_x * temp_x + temp_y * temp_y);
+  }
+  var counts = {};
 
   for (var i = 0; i < e.features.length; i++) {
-    cluster.add(e.features[i].data.geometry.coordinates);
+    var distances = [];
+    var market_coords = e.features[i].data.geometry.coordinates;
+
+    for (var j = 0; j < city_points['features'].length; j++) {
+      var city_coords = city_points['features'][j]['geometry']['coordinates'];
+      distances.push(findDistance(city_coords, market_coords));
+    }
+
+    var least_distant = distances.indexOf(Array.min(distances));
+    if (least_distant+'' in counts) {
+      counts[least_distant+''] = counts[least_distant+'']+1;
+    } else {
+      counts[least_distant+''] = 1;
+    }
   }
 
-  var tile = e.tile, g = tile.element;
-  while (g.lastChild) g.removeChild(g.lastChild);
+  // Figure out the max count.
+  var max_array = [];
+  for (var key in counts) {
+    max_array.push(counts[key]);
+  }
+  var max = Array.max(max_array);
 
-  var means = cluster.means();
-  means.sort(function(a, b) { return b.size - a.size; });
-  for (var i = 0; i < means.length; i++) {
-    var mean = means[i], point = g.appendChild(po.svg("circle"));
-    point.setAttribute("cx", mean.x);
-    point.setAttribute("cy", mean.y);
-    point.setAttribute("r", Math.pow(2, tile.zoom - 11) * Math.sqrt(mean.size) * 100);
+  var tile = e.tile, g = tile.element;
+  while(g.lastChild) g.removeChild(g.lastChild);
+
+  for (var k = 0; k < city_points['features'].length; k++) {
+    var city = document.getElementById("city-"+k);
+
+    if (document.getElementById("display-style").selectedIndex == 0) {
+      city.setAttribute('r', Math.log((counts[k+'']/max)+1)*100);
+    } else {
+      city.setAttribute('r', (counts[k+'']/max)*100);
+    }
   }
 }
 
@@ -46,3 +93,6 @@ function getBB (){
   return map.extent()[0].lon + "," + map.extent()[0].lat + "," + map.extent()[1].lon + "," + map.extent()[1].lat;
 }
 
+document.getElementById("display-style").onchange = function (e) {
+  markets.reload();
+}
