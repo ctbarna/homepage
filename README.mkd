@@ -30,11 +30,11 @@ I'm lazy and I don't want to have to open FTP every time I want to
 update my website. In the spirit of this, I wrote a git `post-update`
 hook that I have in a bare git repository sitting on my web server.
 
-  #!/bin/bash
-  GIT_WORK_TREE=$HOME/stage git checkout -f
-  cd $HOME/stage
-  bundle install
-  jekyll $HOME/stage $HOME/unbrain
+    #!/bin/bash
+    GIT_WORK_TREE=$HOME/stage git checkout -f
+    cd $HOME/stage
+    bundle install
+    jekyll $HOME/stage $HOME/unbrain
 
 If you want to install this, just drop it in the `.git/hooks` directory
 named `post-update` (obviously rename the directories).
