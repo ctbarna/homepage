@@ -1,0 +1,30 @@
+#cities circle {
+  fill:#050;
+  fill-opacity:.7;
+  stroke:#030;
+  stroke-width:2px;
+}
+
+#map {
+  height:550px;
+}
+
+.chevron {
+  stroke:#999;
+  stroke-width:3px;
+  fill:none;
+}
+
+.fore {
+  stroke:#999;
+  stroke-width:1.5px;
+}
+
+.back {
+  fill:#eee;
+  fill-opacity:.8;
+}
+
+.direction {
+  fill:none;
+}

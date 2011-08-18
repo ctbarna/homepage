@@ -1,0 +1,21 @@
+---
+layout: default
+styles:
+- "css/markets.css"
+scripts:
+- "js/polymaps.min.js"
+- "src/cities.js"
+- "js/farmers-map.js"
+---
+.grid_12
+  %h2 Clustering Farmer's Markets
+
+.grid_2.prefix_10(style="padding-bottom:5px;")
+  %select#display-style(style="width:100%")
+    %option(value="log") Logarithmic
+    %option(value="linear") Linear
+
+.clear
+
+.grid_12
+  #map
