@@ -12,15 +12,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nixie+One|Muli&v2">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/960.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}css/style.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}css/960.css">
 
   {% if page.styles %}
     {% for style in page.styles %}
-  <link rel="stylesheet" href="{{ style }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}{{ style }}">
     {% endfor %}
   {% endif %}
-  <script src="/js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="{{ site.baseurl }}js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
@@ -38,7 +38,6 @@
     </header>
     <div id="main" role="main">
       {{ content }}
-
     </div>
     <footer>
       <p class="grid_12">2011, Chris Barna. Runs with help from the <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>, <a href="http://960.gs">960.gs</a>, <a href="http://jekyllrb.com/">jekyll</a>, and <a href="http://haml-lang.com/">haml</a>.</p>
@@ -47,14 +46,14 @@
 
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="{{ site.baseurl }}js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
 
-  <script defer src="/js/plugins.js"></script>
-  <script defer src="/js/script.js"></script>
+  <script defer src="{{ site.baseurl }}js/plugins.js"></script>
+  <script defer src="{{ site.baseurl }}js/script.js"></script>
   {% if page.scripts %}
     {% for script in page.scripts %}
-    <script src="{{ script }}"></script>
+    <script src="{{ site.baseurl }}{{ script }}"></script>
     {% endfor %}
   {% endif %}
 
