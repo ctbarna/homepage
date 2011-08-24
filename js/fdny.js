@@ -28,10 +28,12 @@
       var score = 0, count = 0;
 
       for (var prop in selected) {
+        // Assign a desired score.
         if (selected[prop].length > 0) {
           count += 1;
         }
 
+        // Loop through and score things.
         for (var i = 0; i < selected[prop].length; i += 1) {
           if (selected[prop][i] === d[prop]) {
             score += 1;
@@ -39,7 +41,7 @@
         }
       }
 
-      if (score == count) {
+      if ((score === count) && (score !== 0)) {
         return true;
       } else {
         return false;
@@ -62,65 +64,3 @@
   });
 
 })();
-/* $(document).ready(function() {
-  var srcData, showData, types, boroughs;
-  // Load the data.
-  $.getJSON('../src/fdny.json', function(data) {
-    srcData = data;
-  });
-
-  // Update the selection
-  var updateSelection = function () {
-    var typesElements = $("#types .selected"),
-      boroughsElements = $("#boroughs .selected");
-
-    types = [];
-    boroughs = [];
-
-    typesElements.each(function() {
-      types.push($(this).text());
-    });
-
-    boroughsElements.each(function() {
-      boroughs.push($(this).text());
-    });
-
-    buildShowData();
-  };
-
-  // Set up the array that contains the filtered data.
-  var buildShowData = function () {
-    var tempData = [];
-    showData = [];
-
-    // Iterate through the types.
-    for (var i = 0; i < srcData.length; i+=1) {
-      for (var j = 0; j < types.length; j+=1) {
-        if (srcData[i].INCIDENTCLASSIFICATION === types[j]) {
-          tempData.push(srcData[i]);
-        }
-      }
-    }
-
-    // Iterate through the boroughs.
-    for (var i = 0; i < tempData.length; i+=1) {
-      for (var j = 0; j < boroughs.length; j+=1) {
-        if (tempData[i].INCIDENTBOROUGH == boroughs[j]) {
-          showData.push(tempData[i]);
-        }
-      }
-    }
-
-    displayData();
-  };
-
-  var displayData = function () {
-  }
-
-  // Toggle the selections.
-  $(".selector a").click(function(e) {
-    $(this).toggleClass("selected");
-    updateSelection();
-    return false;
-  });
-}); */
