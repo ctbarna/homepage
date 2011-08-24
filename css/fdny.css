@@ -1,0 +1,31 @@
+ul.selector {
+  margin:0;
+  padding:0;
+  padding-top:10px;
+  list-style-type:none;
+}
+
+ul.selector li {
+  float:left;
+  margin-left:5px;
+  margin-bottom:10px;
+}
+
+ul.selector a:link, ul.selector a:visited {
+  padding:3px;
+  border:1px solid #000;
+  text-decoration:none;
+  color:#000;
+  border-radius:3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+ul.selector a:hover {
+  background-color:#efefef;
+}
+
+ul.selector a.selected:link, ul.selector a.selected:visited {
+  background-color:#000;
+  color:#fff;
+}
