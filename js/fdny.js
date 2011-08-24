@@ -25,23 +25,26 @@
 
     // Set up the data.
     workingData = data.filter(function(d) {
-      var score = 0, count = 0;
+      var signature = '', desired = '';
 
       for (var prop in selected) {
         // Assign a desired score.
         if (selected[prop].length > 0) {
-          count += 1;
+          desired += '+';
+        } else {
+          desired += '-';
+          signature += '-';
         }
 
         // Loop through and score things.
         for (var i = 0; i < selected[prop].length; i += 1) {
           if (selected[prop][i] === d[prop]) {
-            score += 1;
+            signature += '+';
           }
         }
       }
 
-      if ((score === count) && (score !== 0)) {
+      if ((signature === desired)) {
         return true;
       } else {
         return false;
