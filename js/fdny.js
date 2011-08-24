@@ -14,13 +14,13 @@
   var filter = function () {
     var grandparentID = this.parentNode.parentNode.id;
 
-    if (this.getAttribute("class") === "selected") {
+    if (this.className.match(/\bselected\b/)) {
       var index = selected[grandparentID].indexOf(this.innerText);
       selected[grandparentID].splice(index, 1);
-      this.setAttribute("class", null);
+      this.className = this.className.replace(/\bselected\b/, '');
     } else {
       selected[grandparentID].push(this.innerText);
-      this.setAttribute("class", "selected");
+      this.className += " selected";
     }
 
     // Set up the data.
