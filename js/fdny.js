@@ -1,5 +1,5 @@
 (function() {
-  var data, workingData,
+  var data = [], workingData = [],
       selectors = document.getElementsByClassName('selector'),
       selectorVals = {},
       selected = {};
@@ -54,7 +54,9 @@
       } else {
         return false;
       }
-      });
+    });
+
+    generateChart();
 
     return false;
   };
@@ -69,5 +71,47 @@
   d3.json("../src/fdny.json", function(json) {
     data = json;
   });
+
+  var h = 300,
+      w = 960;
+
+  var chart = d3.select("#chart")
+    .append("svg:svg")
+    .attr("width", w)
+    .attr("height", h);
+
+
+  var generateChart = function () {
+    workingData = workingData.filter(function(d) { if (d.YEARMONTH !== "FyTotal") return true; })
+    var wdMax = workingData.reduce( function (a,b) { return Math.max(a, b.INCIDENTCOUNT )}, 0),
+      barWidth = d3.round(w / workingData.length),
+      y = d3.scale.linear()
+        .domain([0, wdMax])
+        .rangeRound([0, 300]),
+      barHeight = function (d) { return y(d.INCIDENTCOUNT); };
+
+    var bars = chart.selectAll('rect')
+      .data(workingData, function(d) { return d.INCIDENTCOUNT; })
+
+    bars.exit().transition()
+      .duration(1000)
+      .attr("width", 0)
+      .attr("height", 0)
+      .remove();
+
+    bars.enter().append("svg:rect")
+      .attr("width", 0)
+      .attr("height", 0)
+      .attr("y", h);
+    bars.transition()
+      .duration(1000)
+      .ease("linear", "out")
+      .attr("x", function (d, i) { return i * barWidth; })
+      .attr("y", function (d) { return h - barHeight(d) - .5; })
+      .transition().duration(1000)
+      .attr("height", barHeight)
+      .attr("width", barWidth);
+
+      };
 
 })();
