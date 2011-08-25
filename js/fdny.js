@@ -12,46 +12,50 @@
 
   // Filter onclick.
   var filter = function () {
-    var grandparentID = this.parentNode.parentNode.id;
+    var grandparentID = this.parentNode.parentNode.id,
+        text = this.textContent || this.innerText;
 
     if (this.className.match(/\bselected\b/)) {
-      var index = selected[grandparentID].indexOf(this.innerText);
+      var index = selected[grandparentID].indexOf(text);
       selected[grandparentID].splice(index, 1);
       this.className = this.className.replace(/\bselected\b/, '');
     } else {
-      selected[grandparentID].push(this.innerText);
+      selected[grandparentID].push(text);
       this.className += " selected";
     }
 
     // Set up the data.
     workingData = data.filter(function(d) {
-      var signature = '', desired = '';
+      var signature = 1, desired = 1, count = 0;
 
       for (var prop in selected) {
+        // Increase the count.
+        count += 1;
+
+        // Bitshift them.
+        signature = signature<<1;
+        desired = desired<<1;
+
         // Assign a desired score.
         if (selected[prop].length > 0) {
-          desired += '+';
-        } else {
-          desired += '-';
-          signature += '-';
+          desired = ~desired;
         }
 
         // Loop through and score things.
         for (var i = 0; i < selected[prop].length; i += 1) {
           if (selected[prop][i] === d[prop]) {
-            signature += '+';
+            signature = ~signature;
           }
         }
       }
 
-      if ((signature === desired)) {
+      if ((signature === desired) && (desired !== 1<<count)) {
         return true;
       } else {
         return false;
       }
       });
 
-    document.getElementById("selection").innerText = JSON.stringify(workingData);
     return false;
   };
 
