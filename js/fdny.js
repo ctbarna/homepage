@@ -84,10 +84,10 @@
   var generateChart = function () {
     workingData = workingData.filter(function(d) { if (d.YEARMONTH !== "FyTotal") return true; })
     var wdMax = workingData.reduce( function (a,b) { return Math.max(a, b.INCIDENTCOUNT )}, 0),
-      barWidth = d3.round(w / workingData.length),
+      barWidth = w / workingData.length,
       y = d3.scale.linear()
         .domain([0, wdMax])
-        .rangeRound([0, 300]),
+        .range([0, 300]),
       barHeight = function (d) { return y(d.INCIDENTCOUNT); };
 
     var bars = chart.selectAll('rect')
@@ -95,6 +95,7 @@
 
     bars.exit().transition()
       .duration(1000)
+      .attr("y", h)
       .attr("width", 0)
       .attr("height", 0)
       .remove();
@@ -107,8 +108,7 @@
       .duration(1000)
       .ease("linear", "out")
       .attr("x", function (d, i) { return i * barWidth; })
-      .attr("y", function (d) { return h - barHeight(d) - .5; })
-      .transition().duration(1000)
+      .attr("y", function (d) { return h - barHeight(d); })
       .attr("height", barHeight)
       .attr("width", barWidth);
 
