@@ -1,4 +1,0 @@
-# SCU.edu in HTML5
-Teaching myself some new web technologies by recreating the homepage for
-[Santa Clara University](http://scu.edu) in
-HTML5/CSS3/jQuery/buzzwords...
